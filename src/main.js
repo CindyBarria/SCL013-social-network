@@ -1,5 +1,7 @@
-// Este es el punto de entrada de tu aplicacion
+import { cambioVista } from './view-controller/index2.js';
+const init = () => {
+  cambioVista(window.location.hash);
+  window.addEventListener ('hashchange', () => cambioVista(window.location.hash));
+};
 
-import { myFunction } from './lib/index.js';
-
-myFunction();
+window.addEventListener('load', init);
