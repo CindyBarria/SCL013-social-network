@@ -1,4 +1,5 @@
-export default () => {
+import { registro } from '../lib/controlador-firebase.js';
+export const registrar = () => {
 const viewLogIn = `
   <h1>Registrate</h1>
   <input type="text" id="nombre" placeholder="Escribe tu nombre"/>
@@ -15,14 +16,7 @@ botonRegistro.addEventListener('click', ()=>{
     let nombre = document.getElementById('nombre').value;
     let correo = document.getElementById('email').value;
     let contraseña = document.getElementById('password').value;
-  
-    firebase.auth().createUserWithEmailAndPassword(correo, contraseña).catch((error) => {
-        
-    let errorCode = error.code;
-    let errorMessage = error.message;
-    alert (errorMessage);
-        
-  });
+    registro(correo,contraseña);
   });
   return divELement;
 
