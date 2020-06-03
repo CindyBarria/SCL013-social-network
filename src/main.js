@@ -1,8 +1,14 @@
-import { cambioVista } from './controlador-vista.js';
+import { menu } from './View/menu.js'
+import { cambioRuta } from './controlador-vista.js';
+
 
 const init = () => {
-  cambioVista(window.location.hash);
-  window.addEventListener ('hashchange', () => cambioVista(window.location.hash));
+  document.getElementById("contenedor").innerHTML=menu()
+  cambioRuta(window.location.hash);
+  window.addEventListener ('hashchange', () => {
+    cambioRuta(window.location.hash);
+  })
+  
 };
 
 window.addEventListener('load', init);
