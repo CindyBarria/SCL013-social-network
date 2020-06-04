@@ -1,5 +1,5 @@
-export const menu = () =>{
-    const viewMenu= `
+export const menu = () => {
+  const viewMenu = `
     <nav>
       <ul>
         <li><a href="#/">Acceso</a></li>
@@ -7,6 +7,6 @@ export const menu = () =>{
         <li><a href="#/muro">Publicaciones</a></li>
         <li><a href="#/cerrarSesion">Cerrar Sesión</a></li>
       </ul>
-    </nav>`
-    return viewMenu
-}
+    </nav>`;
+  return viewMenu;
+};

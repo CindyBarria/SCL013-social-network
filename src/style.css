@@ -1,48 +1,116 @@
-*{
-   margin: 0;
-   padding: 0; 
+* {
+  margin: 0;
+  padding: 0;
 }
-.fondo{
+
+.fondo {
   width: 100%;
   display: flex;
   position: absolute;
 }
-.portada{
+
+.portada {
   display: flex;
   position: relative;
-  border: 2px solid red;
   flex-direction: column;
   align-items: center;
-  width: 26%;
-  height: 71vh;
-  background: #eaeaea;
-  margin-top: 5%;
-  margin-right: 9%;
+  width: 30%;
+  height: 79vh;
+  background: #CFCFCF;
+  margin-top: 8%;
+  margin-right: 10%;
+  border-radius: 6%;
+  font-family: ‘Actor’, sans-serif;
 }
-h1{
+
+h1 {
   color: #4c4c4c;
-  font-size: 20px;
-  font-family: cursive;
+  font-size: 39px;
+  font-family: 'Yellowtail', cursive;
   margin-top: 10%;
 }
+
 input {
   padding: 3%;
   width: 67%;
-  margin: 5%;
-}
-.botones{
-  padding: 4%;
-  margin: 7%;
-}
-hr {
-      width: 100%;
-      padding: -2%;
-      margin: 7px;
-      border: 1px solid #868686;
+  margin: 9%;
+  border-radius: 9px;
+  border: 0em;
 }
 
-.contenedorVista{
+.botones {
+  font-family: 'Actor', sans-serif;
+  background-color: #4653DD;
+  padding: 4%;
+  margin: 7%;
+  margin-top: 13%;
+  border-radius: 8px;
+  color: white;
+  border: 1px solid #4653dd;
+  border-radius: 6%;
+  width: 30%;
+  font-size: 1em;
+  cursor: pointer;
+}
+
+hr {
+  width: 100%;
+  padding: -2%;
+  margin: 7px;
+  border: 1px solid #868686;
+}
+
+.contenedorVista {
   display: flex;
   justify-content: flex-end;
 
+}
+
+input[type="text"] {
+  padding-left: 9%;
+}
+
+input[type="email"] {
+  padding-left: 9%;
+}
+
+input[type="password"] {
+  padding-left: 9%;
+}
+
+
+span {
+  margin-top: -16%;
+  margin-left: -69%;
+}
+
+.logo {
+  position: relative;
+  width: 45%;
+  left: -9%;
+  height: 10%;
+  display: flex;
+  margin-top: 11%;
+}
+
+nav {
+  display: none;
+}
+
+.fondo {
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  width: 100%;
+  height: 700px;
+  display: flex;
+  position: absolute;
+}
+
+#ingresarGoogle {
+  width: 10%;
+  cursor: pointer;
+}
+
+#irRegistrar {
+  margin-top: 4%;
 }
