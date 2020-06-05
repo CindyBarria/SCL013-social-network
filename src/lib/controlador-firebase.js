@@ -11,16 +11,15 @@ export const loginGoogle = () => {
   });
 };
 export const registro = (correo, contraseña) => {
-
-  firebase.auth().createUserWithEmailAndPassword(correo, contraseña).then(alert("Registro exitoso")).catch((error) => {
+  firebase.auth().createUserWithEmailAndPassword(correo, contraseña).then(alert('Registro exitoso')).catch((error) => {
     let errorCode = error.code;
     let errorMessage = error.message;
-    if (errorCode === "auth/invalid-email") {
-      alert("Correo invalido")
-    } else if (errorCode === "auth/weak-password") {
-      alert("La contraseña debe tener minimo 6 carácteres")
-    } else if (errorCode === "auth/email-already-in-use") {
-      alert("Cuenta existente")
+    if (errorCode === 'auth/invalid-email') {
+      alert('Correo invalido')
+    } else if (errorCode === 'auth/weak-password') {
+      alert('La contraseña debe tener minimo 6 carácteres')
+    } else if (errorCode === 'auth/email-already-in-use') {
+      alert('Cuenta existente')
     };
   });
 };
@@ -30,10 +29,10 @@ export const acceso = (correoDos, contraseñaDos) => {
     // Handle Errors here.
     let errorCode = error.code;
     let errorMessage = error.message;
-    if (errorCode === "auth/invalid-email") {
-      alert("Correo invalido");
-    } else if (errorCode === "auth/wrong-password") {
-      alert("Contraseña invalida o no posee contraseña");
+    if (errorCode === 'auth/invalid-email') {
+      alert('Correo invalido');
+    } else if (errorCode === 'auth/wrong-password') {
+      alert('Contraseña invalida o no posee contraseña');
     }
   });
 };
@@ -49,7 +48,6 @@ export const autentificacion = (correoDos, contraseñaDos) => {
       let isAnonymous = user.isAnonymous;
       let uid = user.uid;
       let providerData = user.providerData;
-      document.getElementById("bienvenida").innerHTML = "Bienvenida" + displayName;
     } 
   });
 };

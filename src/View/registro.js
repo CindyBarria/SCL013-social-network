@@ -1,4 +1,5 @@
 import { registro } from '../lib/controlador-firebase.js';
+
 export const registrar = () => {
   const viewLogIn = `
 <img class="fondo" src="../img/fondo.jpg" />
@@ -16,14 +17,13 @@ export const registrar = () => {
   </>`;
 
   const divELement = document.createElement('div');
-  divELement.setAttribute("class", "contenedorVista");
+  divELement.setAttribute('class', 'contenedorVista');
   divELement.innerHTML = viewLogIn;
   document.getElementById('contenedor').appendChild(divELement);
   const botonRegistro = document.querySelector('#registrarse');
   botonRegistro.addEventListener('click', () => {
-    let nombre = document.getElementById('nombre').value;
-    let correo = document.getElementById('email').value;
-    let contraseña = document.getElementById('password').value;
+    const correo = document.getElementById('email').value;
+    const contraseña = document.getElementById('password').value;
     registro(correo, contraseña);
   });
   return divELement;

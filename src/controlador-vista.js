@@ -3,7 +3,7 @@ import { registrar } from './View/registro.js';
 import { menu } from './View/menu.js';
 
 const cambioVista = (hash) => {
-  const contenedor = document.getElementById("contenedor");
+  const contenedor = document.getElementById('contenedor');
   contenedor.innerHTML = menu();
   switch (hash) {
     case '#/menu':

@@ -1,4 +1,5 @@
 import { acceso, autentificacion, loginGoogle } from '../lib/controlador-firebase.js';
+
 export const ingresar = () => {
   const viewHome = `
 
@@ -20,7 +21,7 @@ export const ingresar = () => {
 </div>`;
 
   const divAcceso = document.createElement('div');
-  divAcceso.setAttribute("class", "contenedorVista");
+  divAcceso.setAttribute('class', 'contenedorVista');
   divAcceso.innerHTML = viewHome;
   document.getElementById('contenedor').appendChild(divAcceso);
 
@@ -31,8 +32,8 @@ export const ingresar = () => {
 
   const botonRegistro = document.querySelector('#ingresar');
   botonRegistro.addEventListener('click', () => {
-    let correoDos = document.getElementById('correo2').value;
-    let contraseñaDos = document.getElementById('contraseña2').value;
+    const correoDos = document.getElementById('correo2').value;
+    const contraseñaDos = document.getElementById('contraseña2').value;
     acceso(correoDos, contraseñaDos);
     autentificacion(correoDos, contraseñaDos);
   });
