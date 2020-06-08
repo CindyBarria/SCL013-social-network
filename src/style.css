@@ -101,6 +101,13 @@ span {
 nav {
   display: none;
 }
+.error{
+  width: 55%;
+  height: 658px;
+  display: flex;
+  position: absolute;
+  margin-left: 25%;
+}
 
 
 
