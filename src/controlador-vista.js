@@ -1,13 +1,14 @@
 import { ingresar } from './View/acceso.js';
 import { registrar } from './View/registro.js';
-import { menu } from './View/menu.js';
+import { publicar} from './View/publicaciones.js'
+
 
 const cambioVista = (hash) => {
   const contenedor = document.getElementById('contenedor');
-  contenedor.innerHTML = menu();
+  contenedor.innerHTML ='';
   switch (hash) {
-    case '#/menu':
-      contenedor.appendChild(menu());
+    case '':
+      contenedor.appendChild(ingresar());
       break;
     case '#/':
       contenedor.appendChild(ingresar());
@@ -15,7 +16,12 @@ const cambioVista = (hash) => {
     case '#/registro':
       contenedor.appendChild(registrar());
       break;
+      case '#/muro':
+      contenedor.appendChild(publicar());
+      break;
     default:
+      contenedor.innerHTML = 
+      `<img class="error" src="../img/error-404-no-found.jpg" />`
   }
 };
 
