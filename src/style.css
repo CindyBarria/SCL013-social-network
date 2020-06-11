@@ -42,12 +42,11 @@ input {
 
 .botones {
   font-family: 'Actor', sans-serif;
-  background-color: #4653DD;
+  background: #6d328c;
   padding: 4%;
   margin: 7%;
   margin-top: 13%;
   color: white;
-  border: 1px solid #4653dd;
   border-radius: 6%;
   width: 30%;
   font-size: 1em;
@@ -100,14 +99,14 @@ span {
 nav {
   display: none;
 }
-.error{
+
+.error {
   width: 55%;
   height: 658px;
   display: flex;
   position: absolute;
   margin-left: 25%;
 }
-
 
 
 #ingresarGoogle {
@@ -119,15 +118,151 @@ nav {
   margin-top: 4%;
 }
 
-#ingresarGoogleBoton{
-display: none;
+#ingresarGoogleBoton {
+  display: none;
+}
+
+#muro {
+  font-family: 'Actor', sans-serif;
+  background: #F1F1F1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.textoMuro {
+  display: flex;
+  flex-direction: column;
+  height: 103px;
+  align-items: flex-start;
+  width: 53%;
+  margin-top: 4%;
+}
+
+#texto {
+  margin: 0px;
+  height: 112px;
+  width: 713px;
+  resize: none;
+  border-radius: 6px;
+  border: 1px solid #733d8a;
+}
+
+#photo {
+  background: white;
+  width: 100%;
+  height: 280px;
+}
+
+#publicar {
+  display: flex;
+  border: 2px solid #9269ac;
+  width: 15%;
+  height: 36px;
+  justify-content: center;
+  align-items: center;
+  background: #6d328c;
+  border-radius: 7px;
+  margin-left: 5%;
+  color: white;
+  cursor: pointer;
+  margin-top: 1%;
+}
+
+#cargar {
+  display: flex;
+  border: 2px solid #9269ac;
+  width: 15%;
+  height: 36px;
+  justify-content: center;
+  align-items: center;
+  background: #6d328c;
+  color: white;
+  border-radius: 7px;
+  margin-left: 7%;
+  cursor: pointer;
+  margin-top: 1%;
+}
+
+.editar {
+  display: flex;
+  border: 2px solid #9269ac;
+  width: 30%;
+  height: 36px;
+  justify-content: center;
+  align-items: center;
+  background: #6d328c;
+  color: white;
+  border-radius: 7px;
+  margin-left: 7%;
+  cursor: pointer;
+}
+
+.boton {
+  display: flex;
+  flex-direction: row-reverse;
+  width: 52%;
+}
+
+#imagen {
+  padding: 1%;
+  margin-top: 1%;
+  margin-left: -1%;
+}
+
+#textoPublicado {
+  margin: 0px;
+  width: 713px;
+  height: 31px;
+}
+
+#botonesMuro {
+
+  display: flex;
+  padding: 1%;
+  width: 97%;
+}
+
+.botonPublicaciones {
+  font-family: 'Yellowtail', cursive;
+  font-size: 23px;
+  width: 15%;
+  height: 46px;
+  background: #6d328c;
+  color: white;
+  border-radius: 7px;
+  border: 2px solid #9269ac;
+  margin-right: 3%;
+  cursor: pointer;
+}
+
+.cerrar {
+  font-family: 'Yellowtail', cursive;
+  font-size: 23px;
+  width: 15%;
+  height: 46px;
+  background: #6d328c;
+  color: white;
+  border-radius: 7px;
+  border: 2px solid #9269ac;
+  margin-left: 53%;
+  cursor: pointer;
+}
+
+/*
+#post{
+      margin-left: 24%;
+}*/
+#banner {
+  height: 160px;
+  width: 100%;
 }
 
 @media (max-width: 400px) {
   .fondo {
     height: 22%;
   }
-  
+
   .portada {
     display: flex;
     width: 82%;
@@ -135,46 +270,44 @@ display: none;
     font-family: ‘Actor’, sans-serif;
     background: white;
   }
-  
+
   h1 {
     color: #4c4c4c;
-    font-size:35px;
+    font-size: 35px;
     font-family: 'Yellowtail', cursive;
     margin-top: 10%;
   }
-  
+
   input {
     padding: 5%;
     margin: 10%;
   }
-  
+
   .botones {
     width: 80%;
     border-radius: 12px;
   }
-  
-  
+
   input[type="text"] {
     padding-left: 12%;
     border: 2px solid black;
   }
-  
+
   input[type="email"] {
     padding-left: 12%;
     border: 2px solid black;
   }
-  
+
   input[type="password"] {
     padding-left: 12%;
     border: 2px solid black;
   }
-  
-  
+
   span {
     margin-top: -22%;
     margin-left: -69%;
   }
-  
+
   .logo {
     width: 55%;
     left: -23%;
@@ -184,13 +317,87 @@ display: none;
     background: #abababcf;
     border-radius: 15%;
   }
-   
+
   #ingresarGoogle {
-width: 10%;
+    width: 10%;
   }
 
   #irRegistrar {
     margin-top: 4%;
   }
-  
+
+  #muro {
+    font-family: 'Actor', sans-serif;
+    background: #F1F1F1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-items: inherit;
+    width: 178%;
   }
+
+  #banner {
+    height: 97px;
+    width: 65%;
+  }
+
+  .botonPublicaciones {
+    font-size: 15px;
+    width: 31%;
+  }
+
+  .cerrar {
+    font-size: 15px;
+    width: 31%;
+    margin-left: 0;
+  }
+
+  #botonesMuro {
+    width: 54%;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+  }
+
+  .textoMuro {
+    width: 53%;
+    margin-left: 1%;
+  }
+
+  #texto {
+    width: 100%;
+  }
+  #publicar {
+    width: 48%;
+  }
+  
+  #cargar {
+    display: flex;
+    border: 2px solid #9269ac;
+    width: 15%;
+    height: 36px;
+    justify-content: center;
+    align-items: center;
+    background: #6d328c;
+    color: white;
+    border-radius: 7px;
+    margin-left: 7%;
+    cursor: pointer;
+    margin-top: 1%;
+  }
+  .boton {
+    display: flex;
+    flex-direction: row-reverse;
+    width: 52%;
+  }
+  #imagen {
+    padding: 1%;
+    margin-top: 1%;
+    margin-left: -1%;
+  }
+  #photo {
+    background: white;
+    width: 56%;
+    height: 280px;
+  }
+}

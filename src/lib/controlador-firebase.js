@@ -26,14 +26,21 @@ export const registro = (correo, contraseña) => {
 // Función de acceso de usuario registrado
 
 export const acceso = (correoDos, contraseñaDos) => {
-  firebase.auth().signInWithEmailAndPassword(correoDos, contraseñaDos).catch((error) => {
-    const errorCode = error.code;
-    if (errorCode === 'auth/invalid-email') {
-      alert('Correo invalido');
-    } else if (errorCode === 'auth/wrong-password') {
-      alert('Contraseña invalida o no posee contraseña');
-    }
-  });
+  firebase.auth().signInWithEmailAndPassword(correoDos, contraseñaDos)
+    .then((user) => {
+      window.location.hash = '#/muro';
+      const email = user.email;
+      if (email === user.email) {
+        alert('Hola');
+      }
+    }).catch((error) => {
+      const errorCode = error.code;
+      if (errorCode === 'auth/invalid-email') {
+        alert('Correo invalido');
+      } else if (errorCode === 'auth/wrong-password') {
+        alert('Contraseña invalida o no posee contraseña');
+      }
+    });
 };
 
 // Función de autentificación de usuario registrado
@@ -61,5 +68,57 @@ export const subirImagen = () => {
       alert('Imagen cargada Exitosamente');
       const image = document.querySelector('#photo');
       image.src = url;
+    });
+};
+
+// agregar publicacion
+
+export const agregarPublicacion = () => {
+  const texto = document.querySelector('#texto').value;
+
+  firebase.firestore().collection('publicaciones').add({
+    publicacion: texto,
+  })
+    .then((docRef) => {
+      console.log('Document written with ID: ', docRef.id);
+      document.querySelector('#texto').value = '';
+    })
+    .catch((error) => {
+      console.error('Error adding document: ', error);
+    });
+};
+
+// leer datos
+
+export const leerDatos = () => {
+  const publicacionMuro = document.querySelector('#post');
+  publicacionMuro.innerHTML = '';
+  firebase.firestore().collection('publicaciones').onSnapshot((querySnapshot) => {
+    querySnapshot.forEach((doc) => {
+      console.log(`${doc.id} => ${doc.data().publicacion}`);
+      publicacionMuro.innerHTML += `
+        <div id='post'>
+<h2 id='nombreUsuario'>${doc.id}</h2>
+<p id='textoPublicado'>${doc.data().publicacion}</p>
+<img id="photo"/>
+<div class='boton'>
+<button class='editar'>Eliminar</button>
+<button class='editar'>Editar</button>
+</div>
+</div>`;
+    });
+  });
+};
+
+// cerrar sesion
+
+export const cerrar = () => {
+  firebase.auth().signOut()
+    .then(() => {
+      window.location.hash = '#/cerrarSesion';
+      window.location.reload();
+    })
+    .catch((error) => {
+      console.log(error);
     });
 };

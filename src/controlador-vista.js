@@ -19,6 +19,9 @@ const cambioVista = (hash) => {
     case '#/muro':
       contenedor.appendChild(publicar());
       break;
+    case '#/cerrarSesion':
+      contenedor.appendChild(ingresar());
+      break;
     default:
   }
 };
@@ -30,6 +33,9 @@ export const cambioRuta = ((hash) => {
     return cambioVista(hash);
   }
   if (hash === '#/muro') {
+    return cambioVista(hash);
+  }
+  if (hash === '#/cerrarSesion') {
     return cambioVista(hash);
   }
   return cambioVista(hash);
