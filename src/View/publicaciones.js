@@ -22,8 +22,7 @@ export const publicar = () => {
 <p id='textoPublicado'>hola cindy</p>
 <img id='photo' />
 <div class='boton'>
-<button class='editar'>Eliminar</button>
-<button class='editar'>Editar</button>
+<button class='eliminar'>Eliminar</button>
 </div>
 </div>
 
