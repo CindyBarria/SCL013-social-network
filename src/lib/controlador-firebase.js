@@ -2,8 +2,12 @@
 
 export const loginGoogle = () => {
   const provider = new firebase.auth.GoogleAuthProvider();
-  firebase.auth().signInWithPopup(provider).catch(() => {
-  });
+  firebase.auth().signInWithPopup(provider)
+    .then(() => {
+      window.location.hash = '#/muro';
+    })
+    .catch(() => {
+    });
 };
 
 // Función de registro para nuevos usuarios
@@ -27,12 +31,8 @@ export const registro = (correo, contraseña) => {
 
 export const acceso = (correoDos, contraseñaDos) => {
   firebase.auth().signInWithEmailAndPassword(correoDos, contraseñaDos)
-    .then((user) => {
+    .then(() => {
       window.location.hash = '#/muro';
-      const email = user.email;
-      if (email === user.email) {
-        alert('Hola');
-      }
     }).catch((error) => {
       const errorCode = error.code;
       if (errorCode === 'auth/invalid-email') {
@@ -65,7 +65,6 @@ export const subirImagen = () => {
   task
     .then(snapshot => snapshot.ref.getDownloadURL())
     .then((url) => {
-      alert('Imagen cargada Exitosamente');
       const image = document.querySelector('#photo');
       image.src = url;
     });
@@ -75,13 +74,15 @@ export const subirImagen = () => {
 
 export const agregarPublicacion = () => {
   const texto = document.querySelector('#texto').value;
-
+  const image = document.querySelector('#imagen').value;
   firebase.firestore().collection('publicaciones').add({
     publicacion: texto,
+    imagen: image,
   })
     .then((docRef) => {
       console.log('Document written with ID: ', docRef.id);
       document.querySelector('#texto').value = '';
+      document.querySelector('#imagen').value = '';
     })
     .catch((error) => {
       console.error('Error adding document: ', error);
@@ -95,25 +96,32 @@ export const leerDatos = () => {
   publicacionMuro.innerHTML = '';
   firebase.firestore().collection('publicaciones').onSnapshot((querySnapshot) => {
     querySnapshot.forEach((doc) => {
-      console.log(`${doc.id} => ${doc.data().publicacion}`);
-      publicacionMuro.innerHTML += `<div id='post'>
-<h2 id='nombreUsuario'>${doc.id}</h2>
-<p id='textoPublicado'>${doc.data().publicacion}</p>
-<img id='photo'/>
-<div class='boton'>
-<button class='eliminar'>Eliminar</button>
-</div>
-</div>`;
-      const eliminar = document.querySelector('.eliminar');
-      eliminar.addEventListener('click', () => {
-        firebase.firestore().collection('publicaciones').doc(doc.id).delete()
+      publicacionMuro.innerHTML += `
+      <div id='postear' data-id='${doc.id}'>
+      <h2 id='nombreUsuario'></h2>
+      <p id='textoPublicado'>${doc.data().publicacion}</p>
+      <img id='photo' />
+      <div class='boton'>
+      <button class='eliminar'>Eliminar</button>
+      </div>
+      </div>`;
+      const borrarPost = (id) => {
+        firebase.firestore().collection('publicaciones').doc(id).delete()
           .then(() => {
             alert('Documento Eliminado');
+            console.log(id, 'ESTOY BORRANDOOOOOOO');
             window.location.reload();
           })
           .catch((error) => {
             console.error('Error removing document: ', error);
           });
+      };
+      const botonBorrar = document.querySelectorAll('.eliminar');
+      botonBorrar.forEach((btn) => {
+        btn.addEventListener('click', (event) => {
+          const borrarPostId = event.target.parentElement.parentElement.getAttribute('data-id');
+          borrarPost(borrarPostId);
+        });
       });
     });
   });
