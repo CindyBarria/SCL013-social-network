@@ -7,23 +7,17 @@ export const publicar = () => {
 <div id='botonesMuro'>
 <button class='botonPublicaciones'>Mi Perfil</button>
 <button class='botonPublicaciones'>Publicaciones</button>
-<button id ='cerrar' class='cerrar'>Cerrar sesion</button>
+<button id ='cerrar' class='cerrar'>Cerrar sesión</button>
 </div>
-<p class="textoMuro">Crear Publicacion
+<p class="textoMuro">Crear Publicación
 <textarea id='texto' placeholder='¿Que quieres compartir?'></textarea>
 </p>
 <div class='boton'>
 <button id='publicar'>publicar</button>
-<button id='cargar'>Cargar Imagen</button>
 <input type='file'id='imagen'>
 </div>
 <div id='post'>
-<h2 id='nombreUsuario'>Cindy</h2>
-<p id='textoPublicado'>hola cindy</p>
-<img id='photo' />
-<div class='boton'>
-<button class='eliminar'>Eliminar</button>
-</div>
+
 </div>
 
 `;
@@ -31,13 +25,11 @@ export const publicar = () => {
   divPublicar.setAttribute('id', 'muro');
   divPublicar.innerHTML = viewPublicar;
   document.getElementById('contenedor').appendChild(divPublicar);
-  const cargarImagen = divPublicar.querySelector('#cargar');
-  cargarImagen.addEventListener('click', subirImagen);
   leerDatos();
   const muro = document.querySelector('#publicar');
   muro.addEventListener('click', () => {
     agregarPublicacion();
-    document.querySelector('#post').innerHTML = '';
+    subirImagen();
   });
   const cerrarSesion = document.querySelector('#cerrar');
   cerrarSesion.addEventListener('click', () => {
