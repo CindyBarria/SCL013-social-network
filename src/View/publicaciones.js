@@ -1,15 +1,17 @@
 import {
-  subirImagen, agregarPublicacion, leerDatos, cerrar,
+  subirImagen, agregarPublicacion, leerDatos, cerrar, usuario
 } from '../lib/controlador-firebase.js';
 
 export const publicar = () => {
-  window.location.hash = '#/muro';
+  const user = usuario()
   const viewPublicar = `<img id='banner' src='../img/banner.png'/>
 <div id='botonesMuro'>
 <button id ='miPerfil' class='botonPublicaciones'>Mi Perfil</button>
 <button class='botonPublicaciones'>Publicaciones</button>
 <button id ='cerrar' class='cerrar'>Cerrar sesion</button>
 </div>
+<p id="bienvenida">Bienvenida ${user.displayName}</p>
+<img class='photoPerfil' src="${user.photoURL}">
 <p class='textoMuro'>Crear Publicacion
 <textarea id='texto' placeholder='¿Que quieres compartir?'></textarea>
 </p>
@@ -20,6 +22,8 @@ export const publicar = () => {
 </div>
 <div id='post'>
 </div>
+<button id="atras" class="fas fa-chevron-circle-left">Anterior</button>
+<button id="adelante" class="fas fa-chevron-circle-right">Siguiente</button>
 `;
   const divPublicar = document.createElement('div');
   divPublicar.setAttribute('id', 'muro');
@@ -37,5 +41,14 @@ export const publicar = () => {
     cerrar();
     document.getElementById('contenedor').innerHTML = '';
   });
+  // Funciones que hacen el history Api atrás y adelante 
+  const atras = divPublicar.querySelector('#atras');
+  atras.addEventListener('click',() => {
+    window.history.go(-1)
+   });
+   const adelante = divPublicar.querySelector('#adelante');
+   adelante.addEventListener('click',() => {
+    window.history.go(1);
+    });
   return divPublicar;
 };
