@@ -75,9 +75,11 @@ export const subirImagen = () => {
 export const agregarPublicacion = () => {
   const texto = document.querySelector('#texto').value;
   const image = document.querySelector('#imagen').value;
+  const fecha = new Date();
   firebase.firestore().collection('publicaciones').add({
     publicacion: texto,
     imagen: image,
+    fecha:fecha
   })
     .then((docRef) => {
       console.log('Document written with ID: ', docRef.id);
@@ -90,42 +92,61 @@ export const agregarPublicacion = () => {
 };
 
 // leer datos y eliminar datos
-
 export const leerDatos = () => {
   const publicacionMuro = document.querySelector('#post');
-  publicacionMuro.innerHTML = '';
-  firebase.firestore().collection('publicaciones').onSnapshot((querySnapshot) => {
+  firebase.firestore().collection('publicaciones').orderBy('fecha','desc').onSnapshot((querySnapshot) => {
+    publicacionMuro.innerHTML = '';
     querySnapshot.forEach((doc) => {
+     // console.log(`${doc.id} => ${doc.data().publicacion}`)
       publicacionMuro.innerHTML += `
       <div id='postear' data-id='${doc.id}'>
       <h2 id='nombreUsuario'></h2>
-      <p id='textoPublicado'>${doc.data().publicacion}</p>
-      <img id='photo' />
+      <p id='textoPublicado' data-publicacion='${doc.data().publicacion}'>${doc.data().publicacion}</p>
+      <img id='photo'/>
       <div class='boton'>
-      <button class='eliminar'>Eliminar</button>
+      <button class='eliminar''>Eliminar</button>
+      <button class='editar'>Editar</button>
+      <div class='countBtn'>
+      <button class='meGusta' id='like'>Me gusta</button>
+      </div>
+      <div class='countNum'>
+      <h3>0</h3>
+      </div>
       </div>
       </div>`;
-      const borrarPost = (id) => {
-        firebase.firestore().collection('publicaciones').doc(id).delete()
-          .then(() => {
-            alert('Documento Eliminado');
-            console.log(id, 'ESTOY BORRANDOOOOOOO');
-            window.location.reload();
-          })
-          .catch((error) => {
-            console.error('Error removing document: ', error);
-          });
-      };
-      const botonBorrar = document.querySelectorAll('.eliminar');
-      botonBorrar.forEach((btn) => {
-        btn.addEventListener('click', (event) => {
-          const borrarPostId = event.target.parentElement.parentElement.getAttribute('data-id');
-          borrarPost(borrarPostId);
-        });
-      });
-    });
+
+  var div1 = publicacionMuro.querySelector('#postear');
+ // div1.innerHTML='';
+  var align = div1.getAttribute('data-id');
+  console.log(align , 'align')
+  
+  var div2 = publicacionMuro.querySelector('#textoPublicado');
+  //div2.innerHTML='';
+  var align2 = div2.getAttribute('data-publicacion');
+  console.log(align2 ,'align2')
+
+   const eliminar = publicacionMuro.querySelectorAll('.eliminar') 
+   
+    eliminar.forEach(btn => {
+      btn.addEventListener('click', (event) => {
+        let borrarPostId = event.target.parentElement.parentElement.getAttribute('data-id');
+        eliminarPublicacion(borrarPostId);
+      })
+    })   
+})
+})
+}
+//funcion eliminar
+const eliminarPublicacion = (id) => {
+  firebase.firestore().collection('publicaciones').doc(id).delete()
+  .then(() => {
+    
+   // window.location.reload();
+  })
+  .catch((error) => {
+    console.error('Error removing document:', error);
   });
-};
+}
 
 // cerrar sesion
 
