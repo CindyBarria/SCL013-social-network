@@ -3,12 +3,18 @@
 export const loginGoogle = () => {
   const provider = new firebase.auth.GoogleAuthProvider();
   firebase.auth().signInWithPopup(provider)
-    .then(() => {
+  .then((result) => {
+    const user = result.user;
       window.location.hash = '#/muro';
     })
     .catch(() => {
     });
 };
+
+// Función que llama el usuario actual de google
+export const usuario = () => {
+  return firebase.auth().currentUser
+}
 
 // Función de registro para nuevos usuarios
 
