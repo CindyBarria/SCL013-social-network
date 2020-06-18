@@ -1,9 +1,9 @@
 import {
-  subirImagen, agregarPublicacion, leerDatos, cerrar, usuario
+  subirImagen, agregarPublicacion, leerDatos, cerrar, usuario,
 } from '../lib/controlador-firebase.js';
 
 export const publicar = () => {
-  const user = usuario()
+  const user = usuario();
   const viewPublicar = `<img id='banner' src='../img/banner.png'/>
 <div id='botonesMuro'>
 <button id ='miPerfil' class='botonPublicaciones'>Mi Perfil</button>
@@ -41,14 +41,14 @@ export const publicar = () => {
     cerrar();
     document.getElementById('contenedor').innerHTML = '';
   });
-  // Funciones que hacen el history Api atrás y adelante 
+  // Funciones que hacen el history Api atrás y adelante
   const atras = divPublicar.querySelector('#atras');
-  atras.addEventListener('click',() => {
-    window.history.go(-1)
-   });
-   const adelante = divPublicar.querySelector('#adelante');
-   adelante.addEventListener('click',() => {
+  atras.addEventListener('click', () => {
+    window.history.go(-1);
+  });
+  const adelante = divPublicar.querySelector('#adelante');
+  adelante.addEventListener('click', () => {
     window.history.go(1);
-    });
+  });
   return divPublicar;
 };
