@@ -3,8 +3,7 @@
 export const loginGoogle = () => {
   const provider = new firebase.auth.GoogleAuthProvider();
   firebase.auth().signInWithPopup(provider)
-  .then((result) => {
-    const user = result.user;
+    .then(() => {
       window.location.hash = '#/muro';
     })
     .catch(() => {
@@ -12,9 +11,8 @@ export const loginGoogle = () => {
 };
 
 // Función que llama el usuario actual de google
-export const usuario = () => {
-  return firebase.auth().currentUser
-}
+export const usuario = () => firebase.auth().currentUser;
+
 
 // Función de registro para nuevos usuarios
 
@@ -85,27 +83,34 @@ export const agregarPublicacion = () => {
   firebase.firestore().collection('publicaciones').add({
     publicacion: texto,
     imagen: image,
-    fecha:fecha
+    fecha,
+  }).then((docRef) => {
+    console.log('Document written with ID: ', docRef.id);
+    document.querySelector('#texto').value = '';
+    document.querySelector('#imagen').value = '';
   })
-    .then((docRef) => {
-      console.log('Document written with ID: ', docRef.id);
-      document.querySelector('#texto').value = '';
-      document.querySelector('#imagen').value = '';
-    })
     .catch((error) => {
       console.error('Error adding document: ', error);
+    });
+};
+// funcion eliminar
+const eliminarPublicacion = (id) => {
+  firebase.firestore().collection('publicaciones').doc(id).delete()
+    .then(() => {
+    })
+    .catch((error) => {
+      console.error('Error removing document:', error);
     });
 };
 
 // leer datos y eliminar datos
 export const leerDatos = () => {
   const publicacionMuro = document.querySelector('#post');
-  firebase.firestore().collection('publicaciones').orderBy('fecha','desc').onSnapshot((querySnapshot) => {
+  firebase.firestore().collection('publicaciones').orderBy('fecha', 'desc').onSnapshot((querySnapshot) => {
     publicacionMuro.innerHTML = '';
     querySnapshot.forEach((doc) => {
-     // console.log(`${doc.id} => ${doc.data().publicacion}`)
       publicacionMuro.innerHTML += `
-      <div id='postear' data-id='${doc.id}'>
+       <div id='postear' data-id='${doc.id}'>
       <h2 id='nombreUsuario'></h2>
       <p id='textoPublicado' data-publicacion='${doc.data().publicacion}'>${doc.data().publicacion}</p>
       <img id='photo'/>
@@ -121,38 +126,16 @@ export const leerDatos = () => {
       </div>
       </div>`;
 
-  var div1 = publicacionMuro.querySelector('#postear');
- // div1.innerHTML='';
-  var align = div1.getAttribute('data-id');
-  console.log(align , 'align')
-  
-  var div2 = publicacionMuro.querySelector('#textoPublicado');
-  //div2.innerHTML='';
-  var align2 = div2.getAttribute('data-publicacion');
-  console.log(align2 ,'align2')
-
-   const eliminar = publicacionMuro.querySelectorAll('.eliminar') 
-   
-    eliminar.forEach(btn => {
-      btn.addEventListener('click', (event) => {
-        let borrarPostId = event.target.parentElement.parentElement.getAttribute('data-id');
-        eliminarPublicacion(borrarPostId);
-      })
-    })   
-})
-})
-}
-//funcion eliminar
-const eliminarPublicacion = (id) => {
-  firebase.firestore().collection('publicaciones').doc(id).delete()
-  .then(() => {
-    
-   // window.location.reload();
-  })
-  .catch((error) => {
-    console.error('Error removing document:', error);
+      const eliminar = publicacionMuro.querySelectorAll('.eliminar');
+      eliminar.forEach((btn) => {
+        btn.addEventListener('click', (event) => {
+          const borrarPostId = event.target.parentElement.parentElement.getAttribute('data-id');
+          eliminarPublicacion(borrarPostId);
+        });
+      });
+    });
   });
-}
+};
 
 // cerrar sesion
 
