@@ -15,7 +15,6 @@ export const usuario = () => firebase.auth().currentUser;
 
 
 // Función de registro para nuevos usuarios
-
 export const registro = (correo, contraseña) => {
   firebase.auth().createUserWithEmailAndPassword(correo, contraseña)
     .then(alert('Registro exitoso'))
@@ -32,7 +31,6 @@ export const registro = (correo, contraseña) => {
 };
 
 // Función de acceso de usuario registrado
-
 export const acceso = (correoDos, contraseñaDos) => {
   firebase.auth().signInWithEmailAndPassword(correoDos, contraseñaDos)
     .then(() => {
@@ -48,7 +46,6 @@ export const acceso = (correoDos, contraseñaDos) => {
 };
 
 // Función de autentificación de usuario registrado
-
 export const autentificacion = () => {
   firebase.auth().onAuthStateChanged((user) => {
     if (user) {
@@ -59,7 +56,6 @@ export const autentificacion = () => {
 };
 
 // Función para subir imagen con FireStore
-
 export const subirImagen = () => {
   const ref = firebase.storage().ref();
   const file = document.querySelector('#imagen').files[0];
@@ -75,7 +71,6 @@ export const subirImagen = () => {
 };
 
 // agregar publicacion
-
 export const agregarPublicacion = () => {
   const texto = document.querySelector('#texto').value;
   const image = document.querySelector('#imagen').value;
@@ -93,6 +88,7 @@ export const agregarPublicacion = () => {
       console.error('Error adding document: ', error);
     });
 };
+
 // funcion eliminar
 const eliminarPublicacion = (id) => {
   firebase.firestore().collection('publicaciones').doc(id).delete()
@@ -103,15 +99,39 @@ const eliminarPublicacion = (id) => {
     });
 };
 
+// funcion editar
+const editar = (id) => {
+  // boton guardar cambios
+  const botonEditar = document.querySelector('#editar');
+  botonEditar.addEventListener('click', () => {
+    document.querySelector('#editar').style.display = 'none';
+    document.querySelector('#publicar').style.display = 'block';
+    // guarda texto editado
+    const texto = document.querySelector('#texto').value;
+    const publicacionRef = firebase.firestore().collection('publicaciones').doc(id);
+    return publicacionRef.update({
+      publicacion: texto,
+    }).then(() => {
+      console.log('Document successfully updated!');
+      document.querySelector('#texto').value = '';
+    }).catch((error) => {
+      console.error('Error updating document: ', error);
+    });
+  });
+};
+
 // leer datos y eliminar datos
 export const leerDatos = () => {
   const publicacionMuro = document.querySelector('#post');
   firebase.firestore().collection('publicaciones').orderBy('fecha', 'desc').onSnapshot((querySnapshot) => {
     publicacionMuro.innerHTML = '';
     querySnapshot.forEach((doc) => {
+      const user = usuario();
       publicacionMuro.innerHTML += `
-       <div id='postear' data-id='${doc.id}'>
-      <h2 id='nombreUsuario'></h2>
+      <div id='postear' data-id='${doc.id}'>
+      <img class='perfilFoto' src="${user.photoURL}">
+      <h2 id='nombreUsuario'>${user.displayName}</h2>
+      <p id='fechaPublicado'>${new Date().toLocaleString()}</p>
       <p id='textoPublicado' data-publicacion='${doc.data().publicacion}'>${doc.data().publicacion}</p>
       <img id='photo'/>
       <div class='boton'>
@@ -125,12 +145,35 @@ export const leerDatos = () => {
       </div>
       </div>
       </div>`;
-
+      // Boton eliminar
       const eliminar = publicacionMuro.querySelectorAll('.eliminar');
       eliminar.forEach((btn) => {
         btn.addEventListener('click', (event) => {
-          const borrarPostId = event.target.parentElement.parentElement.getAttribute('data-id');
-          eliminarPublicacion(borrarPostId);
+          const confirmar = confirm('¿Desea eliminar publicacion?');
+          if (confirmar === true) {
+            const borrarPostId = event.target.parentElement.parentElement.getAttribute('data-id');
+            eliminarPublicacion(borrarPostId);
+          }
+        });
+      });
+
+      // Boton editar ---------------------------------
+      const botonEditar = document.querySelectorAll('.editar');
+      botonEditar.forEach((btn) => {
+        btn.addEventListener('click', (event) => {
+          document.querySelector('#publicar').style.display = 'none';
+          document.querySelector('#editar').style.display = 'block';
+          // ID del texto que se quiere editar
+          const idPost = event.target.parentElement.parentElement.getAttribute('data-id');
+          // firebase
+          const docRef = firebase.firestore().collection('publicaciones').doc(idPost);
+          docRef.get().then(() => {
+          // Guarda texto de la publicacion que se quiere editar
+            const textoEditado = doc.data().publicacion;
+            // coloca texto en textarea
+            document.querySelector('#texto').value = textoEditado;
+            editar(idPost, textoEditado);
+          });
         });
       });
     });
@@ -138,7 +181,6 @@ export const leerDatos = () => {
 };
 
 // cerrar sesion
-
 export const cerrar = () => {
   firebase.auth().signOut()
     .then(() => {

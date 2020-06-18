@@ -113,18 +113,7 @@ nav {
   width: 10%;
   cursor: pointer;
 }
-/*MOdificado*/
-.photoPerfil{
-  width: 11%;
-  display: flex;
-  border-radius: 50%;
-}
-#bienvenida{
-  font-family: 'Yellowtail', cursive;
-  font-size: 30px;
-  width: 30%;
-  display: flex
-}
+
 #irRegistrar {
   margin-top: 4%;
 }
@@ -158,19 +147,53 @@ nav {
   border-radius: 6px;
   border: 1px solid #733d8a;
 }
-
+/*MOdificado*/
+.photoPerfil{
+  width: 38%;
+  display: flex;
+  border-radius: 50%;
+  padding: 4%;
+}
+#bienvenida{
+  font-family: 'Yellowtail', cursive;
+  font-size: 30px;
+  width: 45%;
+  display: flex;
+  text-align: center;
+}
+#perfilUsuario{
+  display: flex;
+  width: 26%;
+  height: 246px;
+  flex-direction: column-reverse;
+  align-items: center;
+  border-radius: 6%;
+}
+.perfilFoto{
+  width: 6%;
+  display: flex;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  margin-top: 2%;
+}
+#postear{
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+#nombreUsuario{
+  margin-left: 1%;
+  margin-top: 2%;
+  display: flex;
+  width: 62%;
+  
+}
 #photo {
   background: white;
   width: 86%;
   height: 51vh;
-}
-
-#post{
-  display: flex;
-  flex-direction: column;
-  text-align: left;
-  margin-left: 7%;
-  width: 60%;
 }
 
 #publicar {
@@ -203,7 +226,7 @@ nav {
   margin-top: 1%;
 }
 
-.eliminar , .editar{
+.eliminar, .editar {
   display: flex;
   border: 2px solid #9269ac;
   width: 30%;
@@ -256,9 +279,10 @@ nav {
 }
 
 #textoPublicado {
-  margin: 0px;
-  width: 713px;
-  height: 31px;
+    width: 86%;
+    height: auto;
+    margin-top: 2%;
+    background: white;
 }
 
 #botonesMuro {
@@ -293,14 +317,36 @@ nav {
   margin-left: 53%;
   cursor: pointer;
 }
+.contenedorPerfil{
+  font-family: 'Actor', sans-serif;
+  background: #F1F1F1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#fotoPerfil{
+  border: 2px solid #6d328c;
+  width: 74%;
+  height: 198px;
+  display: flex;
+  border-radius: 100%;
+  background: #f2f2f2;
+}
 
-/*
 #post{
-      margin-left: 24%;
-}*/
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  margin-left: 7%;
+  width: 60%;
+}
 #banner {
   height: 160px;
   width: 100%;
+}
+#fechaPublicado{
+  margin-left: -62%;
+  margin-top: 6%;
 }
 
 @media (max-width: 400px) {

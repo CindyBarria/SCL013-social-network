@@ -10,8 +10,10 @@ export const publicar = () => {
 <button class='botonPublicaciones'>Publicaciones</button>
 <button id ='cerrar' class='cerrar'>Cerrar sesion</button>
 </div>
+<div id='perfilUsuario'>
 <p id="bienvenida">Bienvenida ${user.displayName}</p>
 <img class='photoPerfil' src="${user.photoURL}">
+</div>
 <p class='textoMuro'>Crear Publicacion
 <textarea id='texto' placeholder='¿Que quieres compartir?'></textarea>
 </p>
