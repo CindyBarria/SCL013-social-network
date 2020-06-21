@@ -6,7 +6,7 @@ export const ingresar = () => {
 <img class="fondo" src="../img/fondo.jpg" />
 <img class="logo" src="../img/logo.png" />
 <div class="portada">
-<h1>Inicia Sesion</h1>
+<h1>Inicia Sesión</h1>
 <input type="email" id="correo2" placeholder="Correo"/>
 <span class="fas fa-envelope" ></span>
 <input type="password" id="contraseña2" placeholder="Contraseña"/>

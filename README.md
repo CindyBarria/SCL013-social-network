@@ -8,7 +8,7 @@ Social Network PINCELBOOK
 * [3. Construcción del proyecto](#3-construcción)
 * [4. Usuarios ](#4-usuarios)
 * [5. Diseño y prototipado](#5-diseño)
-* [6. Navegación](#6-navegación)
+
 
 ***
 
@@ -30,7 +30,7 @@ Nuestra red social nace de la necesidad de proponer una plataforma sencilla en d
 
 Para la construcción de _Pincelbook_ desarrollamos una breve investigación previa tomando como referencias distintas redes sociales. En base a esto, creamos nuestro diagrama de flujo, planificación e historias de usuario utilizando plataformas como "Trello" "Miro" y "Lucidchart".
 
-![diagrama](diagramdeflujo.png)
+![diagrama](diagramadeflujo.png)
 
 
 [Revisa acá nuestra planificación](https://trello.com/b/QQ004iv7/red-social)
@@ -87,5 +87,4 @@ Luego de iteraciones de nuestro prototipo y con la aplicación en proceso con us
 
 (((((ACÁ VA EL DISEÑO FINAL)))))
 
-## 6. Navegación :rowboat:
 
