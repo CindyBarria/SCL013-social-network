@@ -5,17 +5,23 @@ import {
 export const publicar = () => {
   const user = usuario();
   const viewPublicar = `<img id='banner' src='../img/banner.png'/>
-<div id='botonesMuro'>
-<button id ='miPerfil' class='botonPublicaciones'>Mi Perfil</button>
-<button class='botonPublicaciones'>Publicaciones</button>
-<button id ='cerrar' class='cerrar'>Cerrar sesion</button>
+  <header>
+  <input type='checkBox' id='btn-menu'>
+  <label for='btn-menu'><img class='menu-barras' src='../img/bars-solid.png'></label>
+  <nav class='menu'>
+  <div id='botonesMuro'>
+<button id ='miPerfil' class='botonPublicaciones'><i class="fas fa-user-alt"></i></button>
+<button class='botonPublicaciones'><i class="fas fa-home"></i></button>
+<button id ='cerrar' class='cerrar'> Cerrar sesión <i class="fas fa-sign-out-alt"></i></button>
 </div>
+  </nav>
+  </header>
 <div id='perfilUsuario'>
 <p id="bienvenida">Bienvenida ${user.displayName}</p>
 <img class='photoPerfil' src="${user.photoURL}">
 </div>
-<p class='textoMuro'>Crear Publicacion
-<textarea id='texto' placeholder='¿Que quieres compartir?'></textarea>
+<p class='textoMuro'>Crear Publicación</p>
+<textarea id='texto' placeholder='¿Qué quieres compartir?'></textarea>
 </p>
 <div class='boton'>
 <button id='publicar'>publicar</button>
