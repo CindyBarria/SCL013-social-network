@@ -8,9 +8,9 @@ export const perfil = () => {
   <input type='checkBox' id='btn-menu'>
   <label for='btn-menu'><img class='menu-barras' src='../img/bars-solid.png'></label>
   <nav class='menu'>
-  div id='botonesMuro'>
+  <div id='botonesMuro'>
   <button id ='miPerfil' class='botonPublicaciones'><i id= 'perfilIcono'class="fas fa-user-alt"></i></button>
-  <button id='home' 'class='botonPublicaciones'><i id= 'homeIcono'class="fas fa-home"></i></button>
+  <button id='home' class='botonPublicaciones'><i id= 'homeIcono'class="fas fa-home"></i></button>
   <button id ='cerrar' class='cerrar'> Cerrar sesión <i id = 'cerrarSesion'class="fas fa-sign-out-alt"></i></button>
   </div>
   </nav>
