@@ -10,9 +10,9 @@ export const publicar = () => {
   <label for='btn-menu'><img class='menu-barras' src='../img/bars-solid.png'></label>
   <nav class='menu'>
   <div id='botonesMuro'>
-<button id ='miPerfil' class='botonPublicaciones'><i class="fas fa-user-alt"></i></button>
-<button class='botonPublicaciones'><i class="fas fa-home"></i></button>
-<button id ='cerrar' class='cerrar'> Cerrar sesión <i class="fas fa-sign-out-alt"></i></button>
+<button id ='miPerfil' class='botonPublicaciones'><i id= 'perfilIcono'class="fas fa-user-alt"></i></button>
+<button class='botonPublicaciones'><i id= 'homeIcono'class="fas fa-home"></i></button>
+<button id ='cerrar' class='cerrar'> Cerrar sesión <i id = 'cerrarSesion'class="fas fa-sign-out-alt"></i></button>
 </div>
   </nav>
   </header>
@@ -30,9 +30,10 @@ export const publicar = () => {
 </div>
 <div id='post'>
 </div>
+<div id = 'historyApi'>
 <button id="atras" class="fas fa-chevron-circle-left">Anterior</button>
 <button id="adelante" class="fas fa-chevron-circle-right">Siguiente</button>
-`;
+</div>`;
   const divPublicar = document.createElement('div');
   divPublicar.setAttribute('id', 'muro');
   divPublicar.innerHTML = viewPublicar;

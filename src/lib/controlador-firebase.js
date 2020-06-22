@@ -65,7 +65,7 @@ export const subirImagen = () => {
   task
     .then(snapshot => snapshot.ref.getDownloadURL())
     .then((url) => {
-      const image = document.querySelector('#photo');
+      const image = document.querySelector('#fotoPublicacion');
       image.src = url;
     });
 };
@@ -75,10 +75,15 @@ export const agregarPublicacion = () => {
   const texto = document.querySelector('#texto').value;
   const image = document.querySelector('#imagen').value;
   const fecha = new Date();
+  const user = usuario();
   firebase.firestore().collection('publicaciones').add({
+    nombre:user.displayName,
+    uid: user.uid,
     publicacion: texto,
     imagen: image,
     fecha,
+    likes:[],
+    foto:user.photoURL,
   }).then((docRef) => {
     console.log('Document written with ID: ', docRef.id);
     document.querySelector('#texto').value = '';
@@ -125,42 +130,87 @@ export const leerDatos = () => {
   const publicacionMuro = document.querySelector('#post');
   firebase.firestore().collection('publicaciones').orderBy('fecha', 'desc').onSnapshot((querySnapshot) => {
     publicacionMuro.innerHTML = '';
+    const usuario = firebase.auth().currentUser;
+       const userId = usuario.uid;
+       console.log(userId, 'id usuario')
     querySnapshot.forEach((doc) => {
-      const user = usuario();
+     if(doc.data().imagen){
       publicacionMuro.innerHTML += `
       <div id='postear' data-id='${doc.id}'>
-      <img class='perfilFoto' src="${user.photoURL}">
-      <h2 id='nombreUsuario'>${user.displayName}</h2>
+      <img class='perfilFoto' src="${doc.data().foto}">
+      <h2 id='nombreUsuario'>${doc.data().nombre}</h2>
       <p id='fechaPublicado'>${new Date().toLocaleString()}</p>
       <p id='textoPublicado' data-publicacion='${doc.data().publicacion}'>${doc.data().publicacion}</p>
-      <img id='photo'/>
-      <div class='boton'>
-      <button class='eliminar''>Eliminar</button>
-      <button class='editar'>Editar</button>
-      <div class='countBtn'>
-      <button class='meGusta' id='like'>Me gusta</button>
+      <img id='fotoPublicacion' />
+      <div class='botonesPost'>
+      <button class='eliminar'><i id = 'borrar' class="far fa-trash-alt"></i></button>
+      <button class='editar'><i id = 'edit' class="far fa-edit"></i></button>
       </div>
-      <div class='countNum'>
-      <h3>0</h3>
+      <div class="like-counter">
+        <div class='like ${(doc.data().likes) ? 'heart' : 'heart-2'}'></div>
+        <p class="counter-text">${doc.data().likes.length}</p>
       </div>
       </div>
       </div>`;
-      // Boton eliminar
-      const eliminar = publicacionMuro.querySelectorAll('.eliminar');
-      eliminar.forEach((btn) => {
-        btn.addEventListener('click', (event) => {
-          const confirmar = confirm('¿Desea eliminar publicacion?');
-          if (confirmar === true) {
-            const borrarPostId = event.target.parentElement.parentElement.getAttribute('data-id');
-            eliminarPublicacion(borrarPostId);
-          }
-        });
+     }else {
+      publicacionMuro.innerHTML += `
+      <div id='postear' data-id='${doc.id}'>
+      <img class='perfilFoto' src="${doc.data().foto}">
+      <h2 id='nombreUsuario'>${doc.data().nombre}</h2>
+      <p id='fechaPublicado'>${new Date().toLocaleString()}</p>
+      <p id='textoPublicado' data-publicacion='${doc.data().publicacion}'>${doc.data().publicacion}</p>
+      <div class='botonesPost'>
+      <button class='eliminar'><i id = 'borrar' class="far fa-trash-alt"></i></button>
+      <button class='editar'><i id = 'edit' class="far fa-edit"></i></button>
+      </div>
+      <div class="like-counter">
+        <div class='like ${(doc.data().likes) ? 'heart' : 'heart-2'}'></div>
+        <p class="counter-text">${doc.data().likes.length}</p>
+      </div>
+      </div>
+      </div>`;
+     }
+// Boton like
+const likes = publicacionMuro.querySelectorAll('.like');
+likes.forEach((btn) => {
+  console.log(btn, 'boton')
+  btn.addEventListener('click', () => {
+  firebase.firestore().collection('publicaciones').doc(`${doc.id}`).get().then((doc) => {
+    const docLikes = doc.data().likes;
+    const includesUser = docLikes.includes(userId);
+    if (includesUser === true) {
+      firebase.firestore().collection('publicaciones').doc(`${doc.id}`).update({
+        likes: firebase.firestore.FieldValue.arrayRemove(userId),
       });
+      console.log("LIKE SACADO");
+    } else if (includesUser === false) {
+     // likes.classList.add('heart-2')
+      firebase.firestore().collection('publicaciones').doc(`${doc.id}`).update({
+        likes: firebase.firestore.FieldValue.arrayUnion(userId),
+     
+      });
+      console.log("LIKE AGREGADO");
+    }
+  });
+})
+})
+        // Boton eliminar
+        const eliminar = publicacionMuro.querySelectorAll('.eliminar');
+        eliminar.forEach((btn) => {
+          btn.addEventListener('click', (event) => {
+            const confirmar = confirm('¿Desea eliminar publicacion?');
+            if (confirmar === true) {
+              const borrarPostId = event.target.parentElement.parentElement.getAttribute('data-id');
+              eliminarPublicacion(borrarPostId);
+            }
+          });
+        });
 
       // Boton editar ---------------------------------
       const botonEditar = document.querySelectorAll('.editar');
       botonEditar.forEach((btn) => {
         btn.addEventListener('click', (event) => {
+          window.scrollTo(0,0)
           document.querySelector('#publicar').style.display = 'none';
           document.querySelector('#editar').style.display = 'block';
           // ID del texto que se quiere editar

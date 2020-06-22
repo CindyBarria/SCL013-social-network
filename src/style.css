@@ -139,6 +139,7 @@ nav {
   width: 57%;
   font-family: 'Yellowtail', cursive;
   font-size: 137%;
+  margin-left: 3%;
 }
 
 #texto {
@@ -151,7 +152,7 @@ nav {
   align-self: center;
   margin-top: -7%;
 }
-/*MOdificado*/
+
 .photoPerfil{
   width: 50%;
   display: flex;
@@ -160,7 +161,7 @@ nav {
 }
 #bienvenida{
   font-family: 'Yellowtail', cursive;
-  font-size: 152%;
+  font-size: 35px;
   height: 21%;
   display: flex;
   text-align: center;
@@ -183,12 +184,16 @@ nav {
   display: flex;
   flex-direction: column;
   margin-top: 2%;
+  margin-left: 2%;
 }
 #postear{
   display: flex;
   flex-direction: row;
-  align-items: flex-start;
   flex-wrap: wrap;
+  background: #dcc4e0;
+  border-radius: 6px;
+  width: 88%;
+  margin-top: 6%;
 }
 #nombreUsuario{
   margin-left: 1%;
@@ -197,11 +202,12 @@ nav {
   width: 62%;
   font-family: 'Yellowtail', cursive;
 }
-#photo {
+#fotoPublicacion {
   background: white;
-  width: 86%;
+  width: 97%;
   height: 51vh;
   border-radius: 10px;
+  margin-left: 1%;
 }
 
 #publicar {
@@ -236,16 +242,17 @@ nav {
 
 .eliminar, .editar {
   display: flex;
-  border: 2px solid #9269ac;
-  width: 30%;
-  height: 36px;
+  border: none;
+  width: 10%;
+  height: 40px;
   justify-content: center;
   align-items: center;
-  background: #6d328c;
+  background: #6a436d;
   color: white;
-  border-radius: 7px;
-  margin-left: 7%;
+  border-radius: 3px;
+  margin-left: 2%;
   cursor: pointer;
+  font-size: 20px;
 }
 #editar{
   display: none;
@@ -261,19 +268,7 @@ nav {
   cursor: pointer;
   margin-top: 1%;
 }
-.meGusta {
-  display: flex;
-  border: 2px solid #9269ac;
-  width: 130%;
-  height: 36px;
-  justify-content: center;
-  align-items: center;
-  background: #6d328c;
-  color: white;
-  border-radius: 7px;
-  margin-left: 7%;
-  cursor: pointer;
-}
+
 .boton {
   display: flex;
   flex-direction: row-reverse;
@@ -287,50 +282,63 @@ nav {
 }
 
 #textoPublicado {
-    width: 100%;
-    height: auto;
-    margin-top: 2%;
-    margin-left: 1%;
-    /*background: white;*/
+  width: 97%;
+  height: 65px;
+  margin-left: 1%;
+  background: white;
+  margin-top: 2%;
 }
 
 #botonesMuro {
-    display: flex;
-    padding: 1%;
-    width: 97%;
-    margin-left: -87%;
-    margin-top: 4%;
+  display: flex;
+  padding: 1%;
+  width: 97%;
+  margin-left: -74%;
+  margin-top: 4%;
+  justify-content: space-between;
+  border: 1px solid #cfcfcf;
+  width: 97vw;
+  margin-top: unset;
+  height: 29%;
+  background: #dcc4e0;
 }
 
 .botonPublicaciones {
   font-family: 'Yellowtail', cursive;
   font-size: 35px;
-  width: -85%;
-  height: 46px;
-  /*background: #6d328c;*/
+  height: 40px;
+  background: #eeeeee00;
   color: rgb(94, 85, 85);
   border-radius: 7px;
-  /*border: 2px solid #9269ac;*/
   border: none;
-  margin-right: 1%;
   cursor: pointer;
+  width: 4%;
+  display: flex;
+  flex-direction: row;
+  margin-left: 3%;
 }
-
+#miPerfil{
+  margin-right: -69%;
+}
 .cerrar {
   font-family: 'Yellowtail', cursive;
   font-size: 26px;
-  width: 13%;
+  width: 16%;
   height: 39px;
-  /*background: #6d328c;*/
+  background: #6d328c00;
   color: rgb(94, 85, 85);
   border-radius: 7px;
-  /*border: 2px solid #9269ac;*/
   border: none;
-  margin-left: 285%;
   cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 }
 
-
+#cerrarSesion{
+  margin-left: 5%;
+  margin-top: 2%;
+}
 .contenedorPerfil{
   font-family: 'Actor', sans-serif;
   background: #F1F1F1;
@@ -353,6 +361,7 @@ nav {
   text-align: left;
   margin-left: 7%;
   width: 60%;
+  margin-top: -4%;
 }
 #banner {
   height: 107px;
@@ -372,18 +381,103 @@ header label {
   display: none;
 }
 .menu{
-  display: block;
-  margin-left: -70%;
+  display: flex;
   z-index: 1;
   transition: all 0.5s;
+  flex-direction: row;
+  justify-content: flex-end;
+  width: 100vw;
+  height: 122px;
+}
+.botonesPost{
+  display: flex;
+  flex-direction: row-reverse;
+  width: 98%;
+  justify-content: start;
+  margin-top: 1%;
+}
+.like-counter{
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  margin-top: -4%;
+  margin-left: 3%;
+}
+.heart {
+  background-color: #C4C4C4;
+  height: 20px;
+  transform: rotate(-45deg);
+  width: 20px;
+  margin-bottom: 0.5em;
 }
 
+.heart:before,
+.heart:after {
+content: "";
+background-color: #C4C4C4;
+border-radius: 50%;
+height: 20px;
+position: absolute;
+width: 20px;
+}
 
+.heart:before {
+  top: -10px;
+  left: 0;
+}
+
+.heart:after {
+  left: 10px;
+  top: 0;
+}
+
+.heart-2 {
+  background-color: #6a436d;;
+  height: 20px;
+  transform: rotate(-45deg);
+  width: 20px;
+  margin-bottom: 0.5em;
+  animation-fill-mode: forwards;
+}
+
+.heart-2:before,
+.heart-2:after {
+content: "";
+background-color: #6a436d;;
+border-radius: 50%;
+height: 20px;
+position: absolute;
+width: 20px;
+}
+
+.heart-2:before {
+  top: -10px;
+  left: 0;
+}
+
+.heart-2:after {
+  left: 10px;
+  top: 0;
+}
+.counter-text{
+  font-size: 1.2em;
+  font-family: "Noto sans", sans-serif;
+  width: 100%;
+  height: 32px;
+  margin-left: -17%;
+}
+#historyApi{
+  padding: 2%;
+  width: 95%;
+  text-align: center;
+}
 @media (max-width: 400px) {
   .fondo {
     height: 22%;
   }
-
+  #miPerfil{
+    margin-right: -69%;
+  }
   .menu-barras {
     width: 23px;
     height: 21px;
@@ -399,16 +493,25 @@ header label {
   }
 
   #btn-menu:checked ~ .menu{
-    margin:0;
+    margin: 0px;
+    z-index: 2;
   }
-
+#fotoPublicacion{
+  background: white;
+  width: 98%;
+  height: 51vh;
+  border-radius: 10px;
+  margin-left: 1%;
+}
   .menu{
     display: block;
     margin-left: -125%;    
     z-index: 1;
     transition: all 0.5s;
   }
-
+  #bienvenida{
+    font-size: 29px;
+  }
   #fotoPerfil{
     border: 2px solid #6d328c;
     width: 100%;
@@ -418,10 +521,9 @@ header label {
     background: #f2f2f2;
   }
   .photoPerfil{
-    width: 89%;
-    display: flex;
-    border-radius: 50%;
-    padding: 2%;
+    margin-left: -1%;
+    z-index: 0;
+    color: white;
   }
 
   .perfilFoto {
@@ -441,12 +543,9 @@ header label {
   font-family: 'Yellowtail', cursive;
 }
   #perfilUsuario{
-    display: flex;
-    width: 29%;
-    height: 246px;
-    flex-direction: column-reverse;
-    border-radius: 6%;
-    margin-top: -56%;
+    width: 83%;
+    height: 202px;
+    margin-top: -22%;
     align-self: center;
   }
 #fechaPublicado {
@@ -547,37 +646,40 @@ header label {
 
   
   .botonPublicaciones {
-    font-size: 15px;
-    width: 31%;
-    background: #9570a996;
+    margin-left: -1%;
+    background: #9570a9f7;
     width: 101%;
-    border: 1px solid white;
+    z-index: 3;
+    font-size: 22px;
+    color: white;
   }
 
   .cerrar {
-    font-size: 15px;
-    width: 31%;
-    margin-left: 0;
-    background: #9570a996;
+    z-index: 3;
+    background: #9570a9;
     width: 101%;
-    border: 1px solid white;
+    margin-left: -1%;
+    color: white;
+    font-size: 24px;
   }
 
   #botonesMuro {
-    width: 54%;
+    width: 97%;
     display: flex;
     flex-wrap: wrap;
+    height: 99%;
     flex-direction: column;
     margin-left: 0%;
     margin-top: 2%;
+    z-index: 3;
   }
 
 
 #textoPublicado {
-    width: 100%;
-    height: auto;
-    margin-top: 4%;
-    margin-left: 4%;
+  width: 98%;
+  height: auto;
+  margin-top: 4%;
+  margin-left: 1%;
 }
   .textoMuro {
     width: 53%;
@@ -626,5 +728,13 @@ header label {
     background: white;
     width: 100%;
     height: 280px;
+  }
+  #perfilIcono{
+    margin-left: 47%;
+    margin-top: 2%;
+  }
+  #homeIcono{
+    margin-left: 47%;
+    margin-top: 2%;
   }
 }
