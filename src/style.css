@@ -278,7 +278,9 @@ nav {
 #imagen {
   padding: 1%;
   margin-top: 1%;
-  margin-left: -1%;
+  margin-left: -3%;
+  margin-right: 17%;
+
 }
 
 #textoPublicado {
@@ -304,6 +306,20 @@ nav {
 }
 
 .botonPublicaciones {
+  font-family: 'Yellowtail', cursive;
+  font-size: 35px;
+  height: 40px;
+  background: #eeeeee00;
+  color: rgb(94, 85, 85);
+  border-radius: 7px;
+  border: none;
+  cursor: pointer;
+  width: 4%;
+  display: flex;
+  flex-direction: row;
+  margin-left: 3%;
+}
+#home{
   font-family: 'Yellowtail', cursive;
   font-size: 35px;
   height: 40px;
@@ -404,7 +420,7 @@ header label {
   margin-left: 3%;
 }
 .heart {
-  background-color: #C4C4C4;
+  background-color: #6a436d;
   height: 20px;
   transform: rotate(-45deg);
   width: 20px;
@@ -414,7 +430,7 @@ header label {
 .heart:before,
 .heart:after {
 content: "";
-background-color: #C4C4C4;
+background-color: #6a436d;
 border-radius: 50%;
 height: 20px;
 position: absolute;
@@ -432,7 +448,7 @@ width: 20px;
 }
 
 .heart-2 {
-  background-color: #6a436d;;
+  background-color: #6a436d;
   height: 20px;
   transform: rotate(-45deg);
   width: 20px;
@@ -443,7 +459,7 @@ width: 20px;
 .heart-2:before,
 .heart-2:after {
 content: "";
-background-color: #6a436d;;
+background-color: #6a436d;
 border-radius: 50%;
 height: 20px;
 position: absolute;
@@ -464,7 +480,7 @@ width: 20px;
   font-family: "Noto sans", sans-serif;
   width: 100%;
   height: 32px;
-  margin-left: -17%;
+  margin-left: -43%;
 }
 #historyApi{
   padding: 2%;
@@ -485,6 +501,20 @@ width: 20px;
     margin-top: -8%;
     margin-left: 4%;
   }
+  .like-counter{
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    margin-top: -4%;
+    margin-left: 7%;
+  }
+  .counter-text{
+    font-size: 1.2em;
+    font-family: "Noto sans", sans-serif;
+    width: 100%;
+    height: 32px;
+    margin-left: -43%;
+  }
   #btn-menu {
     display: none;
   }
@@ -499,7 +529,7 @@ width: 20px;
 #fotoPublicacion{
   background: white;
   width: 98%;
-  height: 51vh;
+  height: 33vh;
   border-radius: 10px;
   margin-left: 1%;
 }
@@ -723,6 +753,7 @@ width: 20px;
     padding: 1%;
     margin-top: 1%;
     margin-left: -1%;
+    margin-right: 51%;
   }
   #photo {
     background: white;
@@ -736,5 +767,13 @@ width: 20px;
   #homeIcono{
     margin-left: 47%;
     margin-top: 2%;
+  }
+  #home{
+    margin-left: -1%;
+    background: #9570a9f7;
+    width: 101%;
+    z-index: 3;
+    font-size: 22px;
+    color: white;
   }
 }

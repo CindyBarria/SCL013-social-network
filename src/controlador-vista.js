@@ -1,6 +1,7 @@
 import { ingresar } from './View/acceso.js';
 import { registrar } from './View/registro.js';
 import { publicar } from './View/publicaciones.js';
+import { perfil } from './View/perfil.js';
 
 
 const cambioVista = (hash) => {
@@ -19,6 +20,9 @@ const cambioVista = (hash) => {
     case '#/muro':
       contenedor.appendChild(publicar());
       break;
+    case '#/perfil':
+      contenedor.appendChild(perfil());
+      break;
     case '#/cerrarSesion':
       contenedor.appendChild(ingresar());
       break;
@@ -33,6 +37,9 @@ export const cambioRuta = ((hash) => {
     return cambioVista(hash);
   }
   if (hash === '#/muro') {
+    return cambioVista(hash);
+  }
+  if (hash === '#/perfil') {
     return cambioVista(hash);
   }
   if (hash === '#/cerrarSesion') {

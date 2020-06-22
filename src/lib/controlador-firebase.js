@@ -93,7 +93,27 @@ export const agregarPublicacion = () => {
       console.error('Error adding document: ', error);
     });
 };
-
+// Boton like
+const likeAndUnlike = (postIdLike) =>{
+  firebase.firestore().collection('publicaciones').doc(`${postIdLike}`).get().then((doc) => {
+    const usuario = firebase.auth().currentUser;
+    const userId = usuario.uid;
+    const docLikes = doc.data().likes;
+    const includesUser = docLikes.includes(userId);
+    if (includesUser === true) {
+      firebase.firestore().collection('publicaciones').doc(`${postIdLike}`).update({
+        likes: firebase.firestore.FieldValue.arrayRemove(userId),
+      });
+      console.log("LIKE SACADO");
+    } else if (includesUser === false) {
+      firebase.firestore().collection('publicaciones').doc(`${postIdLike}`).update({
+        likes: firebase.firestore.FieldValue.arrayUnion(userId),
+       
+      });
+      console.log("LIKE AGREGADO");
+    }
+  });
+  }
 // funcion eliminar
 const eliminarPublicacion = (id) => {
   firebase.firestore().collection('publicaciones').doc(id).delete()
@@ -124,6 +144,7 @@ const editar = (id) => {
     });
   });
 };
+
 
 // leer datos y eliminar datos
 export const leerDatos = () => {
@@ -170,30 +191,6 @@ export const leerDatos = () => {
       </div>
       </div>`;
      }
-// Boton like
-const likes = publicacionMuro.querySelectorAll('.like');
-likes.forEach((btn) => {
-  console.log(btn, 'boton')
-  btn.addEventListener('click', () => {
-  firebase.firestore().collection('publicaciones').doc(`${doc.id}`).get().then((doc) => {
-    const docLikes = doc.data().likes;
-    const includesUser = docLikes.includes(userId);
-    if (includesUser === true) {
-      firebase.firestore().collection('publicaciones').doc(`${doc.id}`).update({
-        likes: firebase.firestore.FieldValue.arrayRemove(userId),
-      });
-      console.log("LIKE SACADO");
-    } else if (includesUser === false) {
-     // likes.classList.add('heart-2')
-      firebase.firestore().collection('publicaciones').doc(`${doc.id}`).update({
-        likes: firebase.firestore.FieldValue.arrayUnion(userId),
-     
-      });
-      console.log("LIKE AGREGADO");
-    }
-  });
-})
-})
         // Boton eliminar
         const eliminar = publicacionMuro.querySelectorAll('.eliminar');
         eliminar.forEach((btn) => {
@@ -226,6 +223,16 @@ likes.forEach((btn) => {
           });
         });
       });
+      //like
+      const likeBtn = document.querySelectorAll('.like');
+      likeBtn.forEach((btn)=>{
+        btn.addEventListener('click',(event)=>{
+          event.preventDefault();
+          const postIdLike = event.target.parentElement.parentElement.getAttribute('data-id');
+          likeAndUnlike(postIdLike);
+          likeHeart(postIdLike)
+        })
+      })
     });
   });
 };
