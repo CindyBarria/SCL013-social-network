@@ -85,6 +85,10 @@ De acuerdo a este diseño, hicimos entrevistas de usuarios y test de usabilidad.
 
 Luego de iteraciones de nuestro prototipo y con la aplicación en proceso con usuarios, definimos el siguiente diseño final e interfaz.
 
-(((((ACÁ VA EL DISEÑO FINAL)))))
+![terminado1](final1.png)
+![terminado2](final2.png)
+![terminado3](final3.png)
+![terminado4](final4.png)
+![terminado5](final5.png)
 
 
