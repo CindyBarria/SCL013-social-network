@@ -13,6 +13,12 @@ export const loginGoogle = () => {
 // Función que llama el usuario actual de google
 export const usuario = () => firebase.auth().currentUser;
 
+// Funcion para conectar a storage
+  const storage = firebase.storage();
+export const subirImagen = (file, uid) => {
+  const refStorage = storage.ref(`ColeccionImg/${uid}/${file.name}`);
+   return refStorage.put(file).then(snapshot => snapshot.ref.getDownloadURL());
+};
 
 // Función de registro para nuevos usuarios
 export const registro = (correo, contraseña) => {
@@ -55,32 +61,17 @@ export const autentificacion = () => {
   });
 };
 
-// Función para subir imagen con FireStore
-export const subirImagen = () => {
-  const ref = firebase.storage().ref();
-  const file = document.querySelector('#imagen').files[0];
-  const name = new Date() + file.name;
-  const metadata = { contentType: file.type };
-  const task = ref.child(name).put(file, metadata);
-  task
-    .then(snapshot => snapshot.ref.getDownloadURL())
-    .then((url) => {
-      const image = document.querySelector('#fotoPublicacion');
-      image.src = url;
-    });
-};
 
 // agregar publicacion
-export const agregarPublicacion = () => {
+export const agregarPublicacion = (url) => {
   const texto = document.querySelector('#texto').value;
-  const image = document.querySelector('#imagen').value;
   const fecha = new Date();
   const user = usuario();
   firebase.firestore().collection('publicaciones').add({
     nombre:user.displayName,
     uid: user.uid,
     publicacion: texto,
-    imagen: image,
+    imagen: url,
     fecha,
     likes:[],
     foto:user.photoURL,
@@ -162,7 +153,7 @@ export const leerDatos = () => {
       <h2 id='nombreUsuario'>${doc.data().nombre}</h2>
       <p id='fechaPublicado'>${new Date().toLocaleString()}</p>
       <p id='textoPublicado' data-publicacion='${doc.data().publicacion}'>${doc.data().publicacion}</p>
-      <img id='fotoPublicacion' />
+      <img id='fotoPublicacion' src='${doc.data().imagen}' />
       <div class='botonesPost'>
       <button class='eliminar'><i id = 'borrar' class="far fa-trash-alt"></i></button>
       <button class='editar'><i id = 'edit' class="far fa-edit"></i></button>

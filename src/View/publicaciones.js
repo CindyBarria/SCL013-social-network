@@ -1,5 +1,5 @@
 import {
-  subirImagen, agregarPublicacion, leerDatos, cerrar, usuario,
+  subirImagen, agregarPublicacion, leerDatos, cerrar, usuario
 } from '../lib/controlador-firebase.js';
 import {perfil} from './perfil.js'
 export const publicar = () => {
@@ -23,6 +23,7 @@ export const publicar = () => {
 </div>
 <p class='textoMuro'>Crear Publicación</p>
 <textarea id='texto' placeholder='¿Qué quieres compartir?'></textarea>
+<img id='guardarFoto'/>
 </p>
 <div class='boton'>
 <button id='publicar'>publicar</button>
@@ -40,21 +41,43 @@ export const publicar = () => {
   divPublicar.setAttribute('id', 'muro');
   divPublicar.innerHTML = viewPublicar;
   document.getElementById('contenedor').appendChild(divPublicar);
-  const muro = document.querySelector('#publicar');
-  muro.addEventListener('click', () => {
-    agregarPublicacion();
-    subirImagen();
+
+  //para previualizar foto en un conteedor 
+  const subirFoto = document.querySelector('#imagen');
+  subirFoto.addEventListener('change',()=> {
+   const contenedorImagen = document.getElementById('guardarFoto');
+   const inputImg = document.getElementById('imagen');
+   const reader = new FileReader();
+    reader.onload = (e) => {
+      contenedorImagen.setAttribute('src', e.target.result);
+    };
+    reader.readAsDataURL(inputImg.files[0]);
   });
-  leerDatos();
+  //accion de boton publicar
+  const botonPublicar = document.getElementById('publicar');
+  botonPublicar.addEventListener('click', () => {
+    const info = document.getElementById('imagen').files;
+    if (info.length > 0) {
+      const urlImg = subirImagen(info[0], 'imgPublicacion');
+      urlImg.then((url) => {
+      agregarPublicacion(url);
+      });
+    } else {
+      agregarPublicacion(null);
+    }
+  });
+   leerDatos();
+  // cerrar sesion
   const cerrarSesion = document.querySelector('#cerrar');
   cerrarSesion.addEventListener('click', () => {
     cerrar();
     document.getElementById('contenedor').innerHTML = '';
   });
+  //perfil
   const botonPerfil=document.querySelector('#miPerfil');
   botonPerfil.addEventListener('click' , ()=>{
    perfil()
-})
+  });
   // Funciones que hacen el history Api atrás y adelante
   const atras = divPublicar.querySelector('#atras');
   atras.addEventListener('click', () => {

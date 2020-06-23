@@ -10,7 +10,9 @@
   display: flex;
   position: absolute;
 }
-
+#guardarFoto{
+  display: none;
+}
 .portada {
   display: flex;
   position: relative;
